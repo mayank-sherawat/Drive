@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload Form</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900">
+
+    <div class="min-h-screen flex items-center justify-center">
+        
+        <form action="/upload" method="POST" enctype="multipart/form-data" class="bg-white p-8 rounded-lg shadow-lg w-full max-w-sm text-center">
+            
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Upload a File</h2>
+            
+            <label for="file-upload" class="cursor-pointer inline-flex items-center px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-transform transform hover:scale-105">
+                <svg class="w-6 h-6 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
+                </svg>
+                <span>Choose File</span>
+            </label>
+            
+            <input id="file-upload" name="file" type="file" class="hidden">
+
+            <p id="file-info" class="mt-4 text-xs text-gray-500">After selecting a file, click Submit.</p>
+        
+            <button type="submit" class="w-full mt-6 px-4 py-2 bg-green-500 text-white text-base font-medium rounded-md shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-300">
+                Submit
+            </button>
+            
+        </form>
+        
+    </div>
+
+    <script>
+        const fileInput = document.getElementById('file-upload');
+        // Get a reference to our new paragraph tag
+        const fileInfo = document.getElementById('file-info');
+        const originalText = fileInfo.textContent; // Store the original text
+
+        fileInput.addEventListener('change', () => {
+            if (fileInput.files.length > 0) {
+                // If a file is selected, show its name
+                const fileName = fileInput.files[0].name;
+                fileInfo.textContent = `Selected file: ${fileName}`;
+            } else {
+                // If no file is selected (e.g., user clicks 'cancel'), revert to original text
+                fileInfo.textContent = originalText;
+            }
+        });
+    </script>
+
+</body>
+</html>
