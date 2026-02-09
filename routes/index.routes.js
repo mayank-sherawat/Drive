@@ -17,7 +17,6 @@ router.post('/upload', authMiddleware, upload.single('file'),async (req, res) =>
     const file = req.file;
     const fileName = `${Date.now()}-${file.originalname}`;
 
-    // Upload the file to the 'images' bucket in Supabase
     const { data, error } = await supabase.storage
       .from('my-drive') 
       .upload(fileName, file.buffer, {
